@@ -1,7 +1,7 @@
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { Button, Input, FormControl, FormLabel, Alert, AlertIcon, Box, Textarea, NumberInput, NumberInputField } from '@chakra-ui/react';
-import { db } from "../firebase";
+import { db } from "../../firebase";
 
 const AddGiftForm = () => {
     const [name, setName] = useState('');

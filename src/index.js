@@ -1,19 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import ButtonTest from './ButtonTest';
 import { ChakraProvider } from '@chakra-ui/react';
-import GiftList from './Gift/GiftList';
-import UserAvatar from './Components/Avatar';
-import AddGiftForm from './Gift/InsertGifts';
+import GiftList from '../src/pages/Gift/GiftList';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ChakraProvider>
-      <AddGiftForm/>
+      <GiftList />
     </ChakraProvider>
   </React.StrictMode>
 );
