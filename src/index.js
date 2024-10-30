@@ -5,12 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ButtonTest from './ButtonTest';
 import { ChakraProvider } from '@chakra-ui/react';
+import GiftList from './Gift/GiftList';
+import UserAvatar from './Components/Avatar';
+import AddGiftForm from './Gift/InsertGifts';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ChakraProvider>
-    <ButtonTest/>
-  </ChakraProvider>
+  <React.StrictMode>
+    <ChakraProvider>
+      <AddGiftForm/>
+    </ChakraProvider>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
