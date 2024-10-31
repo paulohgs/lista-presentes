@@ -1,6 +1,7 @@
+import { Alert, AlertIcon, Box, Button, FormControl, FormLabel, Input, NumberInput, NumberInputField, Textarea } from '@chakra-ui/react';
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
-import { Button, Input, FormControl, FormLabel, Alert, AlertIcon, Box, Textarea, NumberInput, NumberInputField } from '@chakra-ui/react';
+import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase";
 
 const AddGiftForm = () => {
@@ -12,6 +13,7 @@ const AddGiftForm = () => {
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -40,6 +42,7 @@ const AddGiftForm = () => {
             setError(`Erro ao adicionar presente. Tentar novamente.${err}`);
         } finally {
             setLoading(false);
+            navigate('/');
         };
     };
 
@@ -67,12 +70,11 @@ const AddGiftForm = () => {
     
             <FormControl id="price" isRequired mb={4}>
               <FormLabel>Preço</FormLabel>
-              <NumberInput
-                value={price}
-                onChange={(value) => setPrice(Number(value))}
-                min={0}
-              >
-                <NumberInputField placeholder="Digite o valor do presente" />
+              <NumberInput>
+                <NumberInputField 
+                  onChange={(e) => setPrice(e.target.value)}
+                  placeholder="Digite o preço do produto"
+                />
               </NumberInput>
             </FormControl>
 

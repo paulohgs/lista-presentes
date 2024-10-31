@@ -1,28 +1,34 @@
+import { Badge, Box, Container, Image, Text } from '@chakra-ui/react';
 import React from 'react';
-import { Box, Heading, Text, Badge, Stack } from '@chakra-ui/react';
 
-const GiftCard = ({ name, description, price, reserved }) => {
+const GiftCard = ({ name, description, price, reserved, imageUrl}) => {
   return (
-    <Box
-      borderWidth="1px"
-      borderRadius="lg"
-      overflow="hidden"
-      p={5}
-      shadow="md"
-      maxW="sm"
-      bg="white"
-    >
-      <Stack spacing={3}>
-        <Heading fontSize="xl">{name}</Heading>
-        <Text>{description}</Text>
-        <Text fontWeight="bold">R$ {price}</Text>
-        <Badge
-          colorScheme={reserved ? 'red' : 'green'}
-          alignSelf="start"
-        >
-          {reserved ? 'Reservado' : 'Disponível'}
-        </Badge>
-      </Stack>
+    <Box  
+    borderWidth="1px"
+    borderRadius="lg"
+    overflow="hidden"
+    shadow="md"
+    maxW='100%'
+    p={4}>
+      <Image
+      src={imageUrl}
+      alt={name}
+      boxSize="200px"
+      objectFit="cover" // Ajusta o tamanho da imagem para preencher o espaço
+      mx="auto"
+    />
+      <Text fontSize="xl" fontWeight="bold">
+        {name}
+      </Text>
+      <Text mt={2} color="gray.600" maxW='300px'>
+        {description}
+      </Text>
+      <Text mt={2} fontWeight="bold">
+        R$ {price}
+      </Text>
+      <Badge mt={2} colorScheme={reserved ? 'red' : 'green'}>
+        {reserved ? 'Reservado' : 'Disponível'}
+      </Badge>
     </Box>
   );
 };

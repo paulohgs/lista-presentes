@@ -1,15 +1,27 @@
+import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
+import InsertGift from './pages/Gift/InsertGifts';
+import ListaPresente from './pages/ListaPresentes/ListaPresentes';
 import reportWebVitals from './reportWebVitals';
-import { ChakraProvider } from '@chakra-ui/react';
-import GiftList from '../src/pages/Gift/GiftList';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <ListaPresente/>,
+  }, {
+    path: 'add-gift',
+    element: <InsertGift />
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ChakraProvider>
-      <GiftList />
+      <RouterProvider router={router}/>  
     </ChakraProvider>
   </React.StrictMode>
 );

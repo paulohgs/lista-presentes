@@ -1,45 +1,52 @@
+import { Box, Container, SimpleGrid, Text, Image } from "@chakra-ui/react";
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db } from "../../firebase";
 import GiftCard from "../../Components/GiftCard";
+import { db } from "../../firebase";
 
 
 const GiftList = () => {
     const [gifts, setGifts] = useState([]);
     const [loading, setLoading] = useState([]);
-    const [error, setError] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const giftData = [];
-            const querySnapshot = await getDocs(collection(db, 'gifts'));
-            querySnapshot.forEach((doc) => {
-              giftData.push({ id: doc.id, ...doc.data() });
-            });
-            setGifts(giftData);
-            console.log(gifts)
-        };
-        fetchData();
+        try {
+            const fetchData = async () => {
+                const giftData = [];
+                const querySnapshot = await getDocs(collection(db, 'gifts'));
+                querySnapshot.forEach((doc) => {
+                  giftData.push({ id: doc.id, ...doc.data() });
+                });
+                setGifts(giftData);
+            };
+            fetchData();
+        } catch (err) {
+            console.error('Erro ao adicionar presente: ', err);
+        } finally {
+            setLoading(false);
+        }
+        
     }, []);
 
+    if(loading) {
+        return (<div>Carregando presentes...</div>)
+    }
+
     return (
-        <div>
-            <h1>Lista de Presentes</h1>
-            <ul>
-                {
-                    gifts.map(gift => (
-                        <li key={gift.id}>
-                            <GiftCard
-                                name={gift.name}
-                                price={gift.price}
-                                description={gift.description}
-                                reserved={gift.reserved}
-                            />
-                        </li>
-                    ))
-                }
-            </ul>
-        </div>
+        <SimpleGrid
+            minChildWidth='250px' spacing='40px'
+      >
+        {gifts.map((gift, index) => (
+          <GiftCard
+          key={index}
+          name={gift.name}
+          description={gift.description}
+          price={gift.price}
+          reserved={gift.reserved}
+          imageUrl={gift.imageUrl}
+        />
+        ))}
+      </SimpleGrid>
     );
 };
 
